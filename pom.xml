@@ -8,6 +8,35 @@
     <artifactId>sweeter</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId> &lt;!&ndash; Replace with your database vendor, e.g., oracle, postgresql &ndash;&gt;-->
+<!--            <artifactId>mysql-connector-java</artifactId> &lt;!&ndash; Replace with the appropriate JDBC driver for your database &ndash;&gt;-->
+<!--            <version>8.0.27</version> &lt;!&ndash; Replace with the appropriate driver version &ndash;&gt;-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.3.1</version> <!-- Replace with the appropriate driver version -->
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.7.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.15.0</version>
+        </dependency>
+    </dependencies>
+
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
