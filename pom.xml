@@ -9,11 +9,11 @@
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>mysql</groupId> &lt;!&ndash; Replace with your database vendor, e.g., oracle, postgresql &ndash;&gt;-->
-<!--            <artifactId>mysql-connector-java</artifactId> &lt;!&ndash; Replace with the appropriate JDBC driver for your database &ndash;&gt;-->
-<!--            <version>8.0.27</version> &lt;!&ndash; Replace with the appropriate driver version &ndash;&gt;-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>mysql</groupId> <!-- Replace with your database vendor, e.g., oracle, postgresql -->
+            <artifactId>mysql-connector-java</artifactId> <!-- Replace with the appropriate JDBC driver for your database -->
+            <version>8.0.27</version> <!-- Replace with the appropriate driver version -->
+        </dependency>
 
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -34,6 +34,11 @@
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
             <version>2.15.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20140107</version>
         </dependency>
     </dependencies>
 

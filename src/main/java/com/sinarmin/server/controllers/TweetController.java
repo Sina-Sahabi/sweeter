@@ -1,9 +1,9 @@
-package com.sinarmin.Server.controllers;
+package com.sinarmin.server.controllers;
 
 import java.sql.SQLException;
 
-import com.sinarmin.Server.data_access.TweetDAO;
-import com.sinarmin.Server.models.Tweet;
+import com.sinarmin.server.data_access.TweetDAO;
+import com.sinarmin.server.models.Tweet;
 
 public class TweetController {
     private final TweetDAO tweetDAO;

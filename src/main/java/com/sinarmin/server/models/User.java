@@ -1,4 +1,4 @@
-package com.sinarmin.Server.models;
+package com.sinarmin.server.models;
 
 import java.util.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +9,7 @@ public class User {
 
     @JsonProperty("firstName")
     private String firstName;
-
+        
     @JsonProperty("lastName")
     private String lastName;
 
@@ -31,10 +31,16 @@ public class User {
     @JsonProperty("createdAt")
     private Date createdAt;
 
-    @JsonProperty("updatedAt")
-    private Date updatedAt;
+    @JsonProperty("avatarPath")
+    private String avatarPath;
 
-    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, Date updatedAt) {
+    @JsonProperty("headerPath")
+    private String headerPath;
+
+    @JsonProperty("bio")
+    private Bio bio;
+
+    public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday, Date createdAt, String avatarPath, String headerPath, Bio bio) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -44,7 +50,9 @@ public class User {
         this.country = country;
         this.birthday = birthday;
         this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.avatarPath = avatarPath;
+        this.headerPath = headerPath;
+        this.bio = bio;
     }
     public User(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) {
         this.id = id;
@@ -55,6 +63,7 @@ public class User {
         this.password = password;
         this.country = country;
         this.birthday = birthday;
+        this.createdAt = new Date();
     }
 
     public User() {
@@ -133,25 +142,45 @@ public class User {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public String getAvatarPath() {
+        return avatarPath;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setAvatarPath(String avatarPath) {
+        this.avatarPath = avatarPath;
+    }
+
+    public String getHeaderPath() {
+        return headerPath;
+    }
+
+    public void setHeaderPath(String headerPath) {
+        this.headerPath = headerPath;
+    }
+
+    public Bio getBio() {
+        return bio;
+    }
+
+    public void setBio(Bio bio) {
+        this.bio = bio;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id='" + id +
-                ", firstName=" + firstName +
-                ", lastName=" + lastName +
-                ", email=" + email +
-                ", phoneNumber=" + phoneNumber +
-                ", password=" + password +
-                ", country=" + country +
+                "id='" + id + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", country='" + country + '\'' +
                 ", birthday=" + birthday +
+                ", createdAt=" + createdAt +
+                ", avatarPath='" + avatarPath + '\'' +
+                ", headerPath='" + headerPath + '\'' +
+                ", bio=" + bio +
                 '}';
     }
 }

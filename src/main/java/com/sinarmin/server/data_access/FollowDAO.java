@@ -1,6 +1,6 @@
-package com.sinarmin.Server.data_access;
+package com.sinarmin.server.data_access;
 
-import com.sinarmin.Server.models.Follow;
+import com.sinarmin.server.models.Follow;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
