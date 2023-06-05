@@ -148,13 +148,12 @@ public class TweetHandler implements HttpHandler {
         os.close();
     }
     public static String[] toStringArray(JSONArray array) {
-        if(array==null)
+        if(array == null)
             return new String[0];
 
-        String[] arr=new String[array.length()];
-        for(int i=0; i<arr.length; i++) {
+        String[] arr = new String[array.length()];
+        for(int i = 0; i < arr.length; i++)
             arr[i]=array.optString(i);
-        }
         return arr;
     }
 }
