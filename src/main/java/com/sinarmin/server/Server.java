@@ -1,11 +1,7 @@
 package com.sinarmin.server;
 
-import com.sinarmin.server.HttpHandlers.SessionHandler;
-import com.sinarmin.server.HttpHandlers.TweetHandler;
-import com.sinarmin.server.HttpHandlers.UserHandler;
+import com.sinarmin.server.HttpHandlers.*;
 import com.sun.net.httpserver.HttpServer;
-import com.sinarmin.server.HttpHandlers.FollowHandler;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
@@ -23,10 +19,12 @@ public class Server {
 //        System.exit(0);
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
+            server.createContext("/bios", new BioHandler());
             server.createContext("/users", new UserHandler());
             server.createContext("/tweets", new TweetHandler());
             server.createContext("/follows", new FollowHandler());
             server.createContext("/sessions", new SessionHandler());
+            server.createContext("/media", new MediaHandler());
             server.start();
         } catch (IOException e) {
             throw new RuntimeException(e);
