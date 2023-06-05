@@ -2,6 +2,7 @@ package com.sinarmin.server.HttpHandlers;
 
 import com.sinarmin.server.controllers.TweetController;
 import com.sinarmin.server.controllers.UserController;
+import com.sinarmin.server.utils.ExtractUserAuth;
 import com.sinarmin.server.utils.JwtAuth;
 import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
@@ -27,17 +28,15 @@ public class TweetHandler implements HttpHandler {
         String response = "";
         String[] splitedPath = path.split("/");
         switch (method) {
+            // ip:port/tweets/tweet-type
             case "POST":
-                switch (splitedPath[splitedPath.length - 3]) {
+                String user_id = ExtractUserAuth.extract(exchange);
+                if (user_id == null) {
+                    response = "token not valid!";
+                    break;
+                }
+                switch (splitedPath[splitedPath.length - 1]) {
                     case "tweet": {
-                        String user_id = splitedPath[splitedPath.length - 2];
-                        String token = splitedPath[splitedPath.length - 1];
-
-                        if (!token.equals(JwtAuth.jws(user_id))) {
-                            response = "token not valid!";
-                            break;
-                        }
-
                         InputStream requestBody = exchange.getRequestBody();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
                         StringBuilder body = new StringBuilder();
@@ -60,14 +59,6 @@ public class TweetHandler implements HttpHandler {
                         break;
                     }
                     case "retweet": {
-                        String user_id = splitedPath[splitedPath.length - 2];
-                        String token = splitedPath[splitedPath.length - 1];
-
-                        if (!token.equals(JwtAuth.jws(user_id))) {
-                            response = "token not valid!";
-                            break;
-                        }
-
                         InputStream requestBody = exchange.getRequestBody();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
                         StringBuilder body = new StringBuilder();
@@ -95,14 +86,6 @@ public class TweetHandler implements HttpHandler {
                         break;
                     }
                     case "quoteTweet": {
-                        String user_id = splitedPath[splitedPath.length - 2];
-                        String token = splitedPath[splitedPath.length - 1];
-
-                        if (!token.equals(JwtAuth.jws(user_id))) {
-                            response = "token not valid!";
-                            break;
-                        }
-
                         InputStream requestBody = exchange.getRequestBody();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
                         StringBuilder body = new StringBuilder();
@@ -129,6 +112,10 @@ public class TweetHandler implements HttpHandler {
                         response = "Tweet successfully retweeted!";
                         break;
                     }
+
+                    default:
+                        response = "unknown-request";
+                        break;
                 }
                 break;
             case "GET":
@@ -140,6 +127,7 @@ public class TweetHandler implements HttpHandler {
                 }
                 break;
             default:
+                response = "unknown-request";
                 break;
         }
         exchange.sendResponseHeaders(200, response.getBytes().length);
@@ -153,7 +141,7 @@ public class TweetHandler implements HttpHandler {
 
         String[] arr = new String[array.length()];
         for(int i = 0; i < arr.length; i++)
-            arr[i]=array.optString(i);
+            arr[i] = array.optString(i);
         return arr;
     }
 }
