@@ -17,7 +17,7 @@ public class UserHandler implements HttpHandler {
         try {
             userController = new UserController();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
@@ -29,15 +29,16 @@ public class UserHandler implements HttpHandler {
                     try {
                         response = userController.getUsers();
                     } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 } else {
                     // Extract the user ID from the path
                     String userId = splitedPath[splitedPath.length - 1];
                     try {
                         response = userController.getUserById(userId);
+                        if (response == null) response = "No User";
                     } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 }
                 break;
@@ -58,7 +59,7 @@ public class UserHandler implements HttpHandler {
                 try {
                     userController.createUser(jsonObject.getString("id"), jsonObject.getString("firstName"), jsonObject.getString("lastName"), jsonObject.getString("email"), jsonObject.getString("phoneNumber"), jsonObject.getString("password"), jsonObject.getString("country"), new Date(jsonObject.getLong("birthday")));
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
                 Files.createDirectories(Paths.get("src/main/java/org/example/server/assets/" + jsonObject.getString("id")));
                 response = "this is done!";
@@ -72,7 +73,7 @@ public class UserHandler implements HttpHandler {
                         userController.deleteUsers();
                         response = "All users deleted";
                     } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 } else {
                     // Extract the user ID from the path
@@ -80,7 +81,7 @@ public class UserHandler implements HttpHandler {
                     try {
                         userController.deleteUser(userId);
                     } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 }
                 response = "This is the response users Delete";

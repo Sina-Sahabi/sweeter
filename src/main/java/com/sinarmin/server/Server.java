@@ -14,7 +14,7 @@ public class Server {
 //            userController.createUser("2", "sadegh", "haeri", "mahdihaerim@gmail.com", "123123123", "123", "Iran", new Date());
 //            userController.createUser("3", "javad", "haeri", "mahdihaerim@gmail.com", "123123123", "123", "Iran", new Date());
 //        } catch (SQLException e) {
-//            throw new RuntimeException(e);
+//            e.printStackTrace(); e.printStackTrace();
 //        }
 //        System.exit(0);
         try {
@@ -28,7 +28,7 @@ public class Server {
             server.createContext("/hashtag", new HashtagHandler());
             server.start();
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace(); e.printStackTrace();
         }
     }
 }

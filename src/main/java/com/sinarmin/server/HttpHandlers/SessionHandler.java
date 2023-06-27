@@ -16,7 +16,7 @@ public class SessionHandler implements HttpHandler {
         try {
             userController = new UserController();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
@@ -30,7 +30,7 @@ public class SessionHandler implements HttpHandler {
                 try {
                     result = userController.getUserByIdAndPass(claimedUserId, userPass);
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
                 if (result == null) {
                     response = "userID or userPassWord is incorrect";

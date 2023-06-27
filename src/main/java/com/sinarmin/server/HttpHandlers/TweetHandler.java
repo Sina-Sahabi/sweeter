@@ -21,7 +21,7 @@ public class TweetHandler implements HttpHandler {
         try {
             tweetController = new TweetController();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
@@ -52,7 +52,7 @@ public class TweetHandler implements HttpHandler {
                         try {
                             tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), null, toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
                         } catch (SQLException e) {
-                            throw new RuntimeException(e);
+                            e.printStackTrace();
                         }
 
                         response = "Tweet successfully tweeted!";
@@ -79,7 +79,7 @@ public class TweetHandler implements HttpHandler {
                             }
                             tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), null, jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
                         } catch (SQLException e) {
-                            throw new RuntimeException(e);
+                            e.printStackTrace();
                         }
 
                         response = "Tweet successfully retweeted!";
@@ -106,7 +106,7 @@ public class TweetHandler implements HttpHandler {
                             }
                             tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
                         } catch (SQLException e) {
-                            throw new RuntimeException(e);
+                            e.printStackTrace();
                         }
 
                         response = "Tweet successfully retweeted!";
@@ -123,7 +123,7 @@ public class TweetHandler implements HttpHandler {
                 try {
                     response = tweetController.getTweetById(tweetId);
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
                 break;
             default:
