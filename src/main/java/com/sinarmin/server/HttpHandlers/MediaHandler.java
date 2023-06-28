@@ -19,7 +19,7 @@ public class MediaHandler implements HttpHandler {
 		try {
 			userController = new UserController();
 		} catch (SQLException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
 		}
 		String response = "";
 		String method = exchange.getRequestMethod();

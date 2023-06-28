@@ -16,7 +16,7 @@ public class    BioHandler implements HttpHandler {
         try {
             userController = new UserController();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
 
         String method = exchange.getRequestMethod();
@@ -29,7 +29,7 @@ public class    BioHandler implements HttpHandler {
                     try {
                         response = userController.getBios();
                     } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 } else {
                     // Extract the user ID from the path
@@ -37,7 +37,7 @@ public class    BioHandler implements HttpHandler {
                     try {
                         response = userController.getBioByUserId(userId);
                     } catch (SQLException e) {
-                        throw new RuntimeException(e);
+                        e.printStackTrace();
                     }
                 }
                 break;

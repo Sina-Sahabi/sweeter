@@ -19,7 +19,7 @@ public class HashtagHandler implements HttpHandler {
         try {
             hashtagController = new HashtagController();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
@@ -52,7 +52,7 @@ public class HashtagHandler implements HttpHandler {
                 try {
                     response = hashtagController.JsonGetHashtag(hashtagid);
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
                 break;
             }
