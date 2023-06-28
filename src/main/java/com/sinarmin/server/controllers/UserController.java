@@ -21,13 +21,19 @@ public class UserController {
 
     public void createUser(String id, String firstName, String lastName, String email, String phoneNumber, String password, String country, Date birthday) throws SQLException {
         User user = new User(id, firstName, lastName, email, phoneNumber, password, country, birthday);
-        userDAO.saveUser(user);
+        if (isUserExists(id))
+            userDAO.updateUser(user);
+        else
+            userDAO.saveUser(user);
     }
 
     public void createBio(String userId, String biography, String location, String website) throws SQLException {
         Bio bio = new Bio(userId, biography, location, website);
         if (userDAO.getUser(userId) == null) throw new SQLException("User does not exist");
-        bioDAO.saveBio(bio);
+        if (bioDAO.getBio(userId) == null)
+            bioDAO.saveBio(bio);
+        else
+            bioDAO.updateBio(bio);
     }
 
     public void deleteUser(String id) throws SQLException {
@@ -60,7 +66,7 @@ public class UserController {
 
     public String getUserById(String id) throws SQLException, JsonProcessingException {
         User user = userDAO.getUser(id);
-        if (user == null) return null;
+        if (user == null) return "No User";
         ObjectMapper objectMapper = new ObjectMapper();
         String response = objectMapper.writeValueAsString(user);
         return response;

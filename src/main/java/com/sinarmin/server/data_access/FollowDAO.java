@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FollowDAO {
+public class    FollowDAO {
 
     private final Connection connection;
     public FollowDAO() throws SQLException {

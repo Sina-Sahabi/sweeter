@@ -56,7 +56,7 @@ public class UserHandler implements HttpHandler {
                 String newUser = body.toString();
                 JSONObject jsonObject = new JSONObject(newUser);
                 try {
-                    userController.createUser(jsonObject.getString("id"), jsonObject.getString("firstName"), jsonObject.getString("lastName"), jsonObject.getString("email"), jsonObject.getString("phoneNumber"), jsonObject.getString("password"), jsonObject.getString("country"), new Date(jsonObject.getLong("birthday")));
+                    userController.createUser(jsonObject.getString("id"), jsonObject.getString("firstName"), jsonObject.getString("lastName"), jsonObject.getString("email"), jsonObject.getString("phoneNumber"), jsonObject.getString("password"), jsonObject.getString("country"), new Date(jsonObject.getString("birthday")));
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }

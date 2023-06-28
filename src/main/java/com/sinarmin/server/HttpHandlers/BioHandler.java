@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import com.sinarmin.server.controllers.UserController;
 import org.json.JSONObject;
 
-public class BioHandler implements HttpHandler {
+public class    BioHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         UserController userController = null;
