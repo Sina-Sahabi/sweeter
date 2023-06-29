@@ -4,20 +4,13 @@ import com.sinarmin.server.HttpHandlers.*;
 import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Server {
     public static void main(String[] args) {
-//        try {
-//            UserController userController = new UserController();
-//            userController.createUser("mahdi", "mahdi", "haeri", "mahdihaerim@gmail.com", "123123123", "123", "Iran", new Date());
-//            userController.createUser("1", "ali", "haeri", "mahdihaerim@gmail.com", "123123123", "123", "Iran", new Date());
-//            userController.createUser("2", "sadegh", "haeri", "mahdihaerim@gmail.com", "123123123", "123", "Iran", new Date());
-//            userController.createUser("3", "javad", "haeri", "mahdihaerim@gmail.com", "123123123", "123", "Iran", new Date());
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        System.exit(0);
         try {
+            Files.createDirectories(Paths.get("src/main/java/com/sinarmin/server/assets"));
             HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
             server.createContext("/bios", new BioHandler());
             server.createContext("/users", new UserHandler());
@@ -33,4 +26,3 @@ public class Server {
         }
     }
 }
-
