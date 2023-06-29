@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 src/main/java/com/sinarmin/server/assets/
+src/main/java/com/sinarmin/server/dataAccess/DatabaseConnectionManager.java
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
