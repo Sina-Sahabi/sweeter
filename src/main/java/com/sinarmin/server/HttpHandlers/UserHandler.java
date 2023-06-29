@@ -84,7 +84,7 @@ public class UserHandler implements HttpHandler {
                         e.printStackTrace();
                     }
                 }
-                response = "This is the response users Delete";
+                response = "This is the response users Delete\nDone!";
                 break;
             default:
                 break;

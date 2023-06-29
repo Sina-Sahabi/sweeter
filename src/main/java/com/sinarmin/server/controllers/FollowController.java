@@ -1,8 +1,12 @@
 package com.sinarmin.server.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinarmin.server.data_access.FollowDAO;
 import com.sinarmin.server.models.Follow;
 import java.sql.SQLException;
+import java.util.List;
+
 public class FollowController {
     private final FollowDAO followDAO;
     public FollowController() throws SQLException {
@@ -23,11 +27,21 @@ public class FollowController {
         followDAO.deleteFollow(follow);
     }
 
-    public void getFollows(String userId) throws SQLException {
-        followDAO.getFollows(userId);
+    public String getFollows(String userId) throws SQLException, JsonProcessingException {
+        List<Follow> follows = followDAO.getFollows(userId);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(follows);
     }
 
-    public void getFollowers(String userId) throws SQLException {
-        followDAO.getFollowers(userId);
+    public String getFollowers(String userId) throws SQLException, JsonProcessingException {
+        List<Follow> follows = followDAO.getFollowers(userId);
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(follows);
+    }
+
+    public String getAll() throws SQLException, JsonProcessingException {
+        List<Follow> follows = followDAO.getAll();
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(follows);
     }
 }

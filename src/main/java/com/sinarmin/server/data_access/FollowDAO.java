@@ -64,6 +64,19 @@ public class    FollowDAO {
         return follows;
     }
 
+    public List<Follow> getAll() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Follow> follows = new ArrayList<>();
+        while (resultSet.next()) {
+            Follow follow = new Follow();
+            follow.setFollower(resultSet.getString("follower"));
+            follow.setFollowed(resultSet.getString("followed"));
+            follows.add(follow);
+        }
+        return follows;
+    }
+
     public boolean isFollowing(String followerId, String followedId) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE follower = ? AND followed = ?");
         preparedStatement.setString(1, followerId);
