@@ -31,13 +31,11 @@ public class MediaHandler implements HttpHandler {
 		} else switch (method) {
 			case "GET":
 				File file;
-				try {
-					file = new File("src/main/java/org/example/server/assets/" + splitedPath[2] + "/" + splitedPath[3] + "." + splitedPath[4]);
-				} catch (NullPointerException e) {
-					response = "no-media";
+				file = new File("src/main/java/org/example/server/assets/" + splitedPath[2] + "/" + splitedPath[3] + "." + splitedPath[4]);
+				if (!file.exists()) {
+					response = "no file";
 					break;
 				}
-
 				exchange.getResponseHeaders().put("Content-Type", Collections.singletonList(splitedPath[4]));
 				exchange.sendResponseHeaders(200, file.length());
 				OutputStream outputStream = exchange.getResponseBody();

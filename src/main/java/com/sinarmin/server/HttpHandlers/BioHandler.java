@@ -35,7 +35,10 @@ public class    BioHandler implements HttpHandler {
                     // Extract the user ID from the path
                     String userId = splitedPath[splitedPath.length - 1];
                     try {
-                        response = userController.getBioByUserId(userId);
+                        if (userController.getBioByUserId(userId) == null)
+                            response = "no bio";
+                        else
+                            response = userController.getBioByUserId(userId);
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
