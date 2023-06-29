@@ -2,8 +2,8 @@ package com.sinarmin.server.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sinarmin.server.data_access.BioDAO;
-import com.sinarmin.server.data_access.UserDAO;
+import com.sinarmin.server.dataAccess.BioDAO;
+import com.sinarmin.server.dataAccess.UserDAO;
 import com.sinarmin.server.models.Bio;
 import com.sinarmin.server.models.User;
 

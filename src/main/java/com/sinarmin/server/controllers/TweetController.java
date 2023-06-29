@@ -5,9 +5,8 @@ import java.sql.SQLException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sinarmin.server.data_access.TweetDAO;
+import com.sinarmin.server.dataAccess.TweetDAO;
 import com.sinarmin.server.models.Tweet;
-import com.sinarmin.server.models.User;
 
 import java.time.LocalDate;
 

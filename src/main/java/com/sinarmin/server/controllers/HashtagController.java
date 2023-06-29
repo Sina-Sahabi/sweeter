@@ -2,15 +2,10 @@ package com.sinarmin.server.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sinarmin.server.data_access.HashtagDAO;
-import com.sinarmin.server.data_access.TweetDAO;
+import com.sinarmin.server.dataAccess.HashtagDAO;
 import com.sinarmin.server.models.Hashtag;
-import com.sinarmin.server.models.Tweet;
-import com.sinarmin.server.models.User;
 
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class HashtagController {

@@ -1,4 +1,4 @@
-package com.sinarmin.server.data_access;
+package com.sinarmin.server.dataAccess;
 
 import com.sinarmin.server.models.Follow;
 

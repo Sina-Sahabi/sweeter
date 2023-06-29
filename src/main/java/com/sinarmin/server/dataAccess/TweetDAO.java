@@ -1,6 +1,5 @@
-package com.sinarmin.server.data_access;
+package com.sinarmin.server.dataAccess;
 
-import com.sinarmin.server.models.Hashtag;
 import com.sinarmin.server.models.Tweet;
 
 import java.sql.*;

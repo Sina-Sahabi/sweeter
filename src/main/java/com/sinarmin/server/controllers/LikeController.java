@@ -2,7 +2,7 @@ package com.sinarmin.server.controllers;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sinarmin.server.data_access.LikeDAO;
+import com.sinarmin.server.dataAccess.LikeDAO;
 import com.sinarmin.server.models.Like;
 import java.sql.SQLException;
 import java.util.List;
