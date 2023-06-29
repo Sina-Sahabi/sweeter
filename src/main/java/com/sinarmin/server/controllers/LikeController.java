@@ -27,6 +27,10 @@ public class LikeController {
 		likeDAO.deleteLike(like);
 	}
 
+	public void deleteAll() throws SQLException {
+		likeDAO.deleteAll();
+	}
+
 	public String getLikes(String Id) throws SQLException, JsonProcessingException {
 		List<Like> likes = likeDAO.getLikes(Id);
 		ObjectMapper objectMapper = new ObjectMapper();

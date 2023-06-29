@@ -26,6 +26,7 @@ public class Server {
             server.createContext("/sessions", new SessionHandler());
             server.createContext("/media", new MediaHandler());
             server.createContext("/hashtag", new HashtagHandler());
+            server.createContext("/like", new LikeHandler());
             server.start();
         } catch (IOException e) {
             throw new RuntimeException(e);

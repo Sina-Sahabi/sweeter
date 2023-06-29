@@ -24,12 +24,12 @@ public class HashtagHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         String response = "";
-        String[] splitedPath = path.split("/");
+        String[] splittedPath = path.split("/");
 
         switch (method) {
             case "PUT": {
-                String hashtagid = splitedPath[splitedPath.length - 2];
-                String tweetId = splitedPath[splitedPath.length - 1];
+                String hashtagid = splittedPath[splittedPath.length - 2];
+                String tweetId = splittedPath[splittedPath.length - 1];
                 Hashtag hashtag = null;
                 try {
                     hashtag = hashtagController.getHashtag(hashtagid);
@@ -48,7 +48,7 @@ public class HashtagHandler implements HttpHandler {
                 break;
             }
             case "get": {
-                String hashtagid = splitedPath[splitedPath.length - 1];
+                String hashtagid = splittedPath[splittedPath.length - 1];
                 try {
                     response = hashtagController.JsonGetHashtag(hashtagid);
                 } catch (SQLException e) {

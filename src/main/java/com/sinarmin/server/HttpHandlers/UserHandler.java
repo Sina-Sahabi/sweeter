@@ -22,10 +22,10 @@ public class UserHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         String response = "";
-        String[] splitedPath = path.split("/");
+        String[] splittedPath = path.split("/");
         switch (method) {
             case "GET":
-                if (splitedPath.length == 2) {
+                if (splittedPath.length == 2) {
                     try {
                         response = userController.getUsers();
                     } catch (SQLException e) {
@@ -33,7 +33,7 @@ public class UserHandler implements HttpHandler {
                     }
                 } else {
                     // Extract the user ID from the path
-                    String userId = splitedPath[splitedPath.length - 1];
+                    String userId = splittedPath[splittedPath.length - 1];
                     try {
                         response = userController.getUserById(userId);
                         if (response == null) response = "No User";
@@ -68,7 +68,7 @@ public class UserHandler implements HttpHandler {
                 response = "This is the response users Put";
                 break;
             case "DELETE":
-                if (splitedPath.length == 2) {
+                if (splittedPath.length == 2) {
                     try {
                         userController.deleteUsers();
                         response = "All users deleted";
@@ -77,7 +77,7 @@ public class UserHandler implements HttpHandler {
                     }
                 } else {
                     // Extract the user ID from the path
-                    String userId = splitedPath[splitedPath.length - 1];
+                    String userId = splittedPath[splittedPath.length - 1];
                     try {
                         userController.deleteUser(userId);
                     } catch (SQLException e) {

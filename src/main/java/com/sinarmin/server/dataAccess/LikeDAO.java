@@ -34,6 +34,10 @@ public class LikeDAO {
 		preparedStatement.executeUpdate();
 	}
 
+	public void deleteAll() throws SQLException {
+		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM likes");
+		preparedStatement.executeUpdate();
+	}
 
 	/**
 	 * @param Id

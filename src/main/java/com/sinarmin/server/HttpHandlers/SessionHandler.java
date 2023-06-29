@@ -21,11 +21,11 @@ public class SessionHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         String response = "";
-        String[] splitedPath = path.split("/");
+        String[] splittedPath = path.split("/");
         switch (method) {
             case "GET":
-                String claimedUserId = splitedPath[splitedPath.length - 2];
-                String userPass = splitedPath[splitedPath.length - 1];
+                String claimedUserId = splittedPath[splittedPath.length - 2];
+                String userPass = splittedPath[splittedPath.length - 1];
                 String result = null;
                 try {
                     result = userController.getUserByIdAndPass(claimedUserId, userPass);

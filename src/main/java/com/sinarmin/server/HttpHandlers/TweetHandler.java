@@ -26,7 +26,7 @@ public class TweetHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         String response = "";
-        String[] splitedPath = path.split("/");
+        String[] splittedPath = path.split("/");
         switch (method) {
             // ip:port/tweets/tweet-type
             case "POST":
@@ -35,7 +35,7 @@ public class TweetHandler implements HttpHandler {
                     response = "token not valid!";
                     break;
                 }
-                switch (splitedPath[splitedPath.length - 1]) {
+                switch (splittedPath[splittedPath.length - 1]) {
                     case "tweet": {
                         InputStream requestBody = exchange.getRequestBody();
                         BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
@@ -119,7 +119,7 @@ public class TweetHandler implements HttpHandler {
                 }
                 break;
             case "GET":
-                String tweetId = splitedPath[splitedPath.length - 1];
+                String tweetId = splittedPath[splittedPath.length - 1];
                 try {
                     response = tweetController.getTweetById(tweetId);
                 } catch (SQLException e) {

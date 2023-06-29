@@ -29,10 +29,10 @@ public class FollowHandler implements HttpHandler {
         String method = exchange.getRequestMethod();
         String path = exchange.getRequestURI().getPath();
         String response = "This is the response follows";
-        String[] splitedPath = path.split("/");
+        String[] splittedPath = path.split("/");
         switch (method) {
             case "GET":
-                if (splitedPath.length == 2) {
+                if (splittedPath.length == 2) {
                     try {
                         response = followController.getAll();
                     } catch (SQLException e) {
@@ -40,16 +40,16 @@ public class FollowHandler implements HttpHandler {
                         throw new RuntimeException(e);
                     }
                 } else {
-                    if (splitedPath.length == 4 && splitedPath[2].equals("followers")) {
+                    if (splittedPath.length == 4 && splittedPath[2].equals("followers")) {
                         try {
-                            response = followController.getFollowers(splitedPath[3]);
+                            response = followController.getFollowers(splittedPath[3]);
                         } catch (SQLException e) {
                             e.printStackTrace();
                             throw new RuntimeException(e);
                         }
-                    } else if (splitedPath.length == 4 && splitedPath[2].equals("followings")) {
+                    } else if (splittedPath.length == 4 && splittedPath[2].equals("followings")) {
                         try {
-                            response = followController.getFollows(splitedPath[3]);
+                            response = followController.getFollows(splittedPath[3]);
                         } catch (SQLException e) {
                             e.printStackTrace();
                             throw new RuntimeException(e);
@@ -60,16 +60,16 @@ public class FollowHandler implements HttpHandler {
                 }
                 break;
             case "POST":
-                if (splitedPath.length != 4) {
+                if (splittedPath.length != 4) {
                     response = "wtf";
-                } else if (!userController.isUserExists(splitedPath[2]) || !userController.isUserExists(splitedPath[3])) {
+                } else if (!userController.isUserExists(splittedPath[2]) || !userController.isUserExists(splittedPath[3])) {
                     response = "user-not-found";
-                } else if (!splitedPath[2].equals(ExtractUserAuth.extract(exchange))) {
+                } else if (!splittedPath[2].equals(ExtractUserAuth.extract(exchange))) {
                     response = "permission-denied";
                 } else {
                     //todo block
                     try {
-                        followController.saveFollow(splitedPath[2], splitedPath[3]);
+                        followController.saveFollow(splittedPath[2], splittedPath[3]);
                     } catch (SQLException e) {
                         e.printStackTrace();
                         throw new RuntimeException(e);
@@ -78,8 +78,8 @@ public class FollowHandler implements HttpHandler {
                 }
                 break;
             case "DELETE":
-                if (splitedPath.length != 4) {
-                    if (splitedPath.length == 2) {
+                if (splittedPath.length != 4) {
+                    if (splittedPath.length == 2) {
                         try {
                             followController.deleteAll();
                         } catch (SQLException e) {
@@ -88,13 +88,13 @@ public class FollowHandler implements HttpHandler {
                         }
                         response = "Done!";
                     } else response = "wtf";
-                } else if (!userController.isUserExists(splitedPath[2]) || !userController.isUserExists(splitedPath[3])) {
+                } else if (!userController.isUserExists(splittedPath[2]) || !userController.isUserExists(splittedPath[3])) {
                     response = "user-not-found";
-                } else if (!splitedPath[2].equals(ExtractUserAuth.extract(exchange))) {
+                } else if (!splittedPath[2].equals(ExtractUserAuth.extract(exchange))) {
                     response = "permission-denied";
                 } else {
                     try {
-                        followController.deleteFollow(splitedPath[2], splitedPath[3]);
+                        followController.deleteFollow(splittedPath[2], splittedPath[3]);
                     } catch (SQLException e) {
                         e.printStackTrace();
                         throw new RuntimeException(e);
