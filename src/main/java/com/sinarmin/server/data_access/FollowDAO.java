@@ -36,6 +36,11 @@ public class    FollowDAO {
         preparedStatement.executeUpdate();
     }
 
+    public void deleteAll() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM follows");
+        preparedStatement.executeUpdate();
+    }
+
     public List<Follow> getFollows(String userId) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM follows WHERE follower = ?");
         preparedStatement.setString(1, userId);

@@ -67,6 +67,7 @@ public class FollowHandler implements HttpHandler {
                 } else if (!splitedPath[2].equals(ExtractUserAuth.extract(exchange))) {
                     response = "permission-denied";
                 } else {
+                    //todo block
                     try {
                         followController.saveFollow(splitedPath[2], splitedPath[3]);
                     } catch (SQLException e) {
@@ -78,7 +79,15 @@ public class FollowHandler implements HttpHandler {
                 break;
             case "DELETE":
                 if (splitedPath.length != 4) {
-                    response = "wtf";
+                    if (splitedPath.length == 2) {
+                        try {
+                            followController.deleteAll();
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                            throw new RuntimeException(e);
+                        }
+                        response = "Done!";
+                    } else response = "wtf";
                 } else if (!userController.isUserExists(splitedPath[2]) || !userController.isUserExists(splitedPath[3])) {
                     response = "user-not-found";
                 } else if (!splitedPath[2].equals(ExtractUserAuth.extract(exchange))) {

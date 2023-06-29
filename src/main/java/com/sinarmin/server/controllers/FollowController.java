@@ -27,6 +27,10 @@ public class FollowController {
         followDAO.deleteFollow(follow);
     }
 
+    public void deleteAll() throws SQLException {
+        followDAO.deleteAll();
+    }
+
     public String getFollows(String userId) throws SQLException, JsonProcessingException {
         List<Follow> follows = followDAO.getFollows(userId);
         ObjectMapper objectMapper = new ObjectMapper();
