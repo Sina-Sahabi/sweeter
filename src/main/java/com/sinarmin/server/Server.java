@@ -22,6 +22,7 @@ public class Server {
             server.createContext("/like", new LikeHandler());
             server.start();
         } catch (IOException e) {
+            e.printStackTrace();
             throw new RuntimeException(e);
         }
     }
