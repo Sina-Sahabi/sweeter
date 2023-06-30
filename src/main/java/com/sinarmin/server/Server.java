@@ -20,7 +20,6 @@ public class Server {
             server.createContext("/media", new MediaHandler());
             server.createContext("/hashtag", new HashtagHandler());
             server.createContext("/like", new LikeHandler());
-            server.createContext("/block", new BlockHandler());
             server.start();
         } catch (IOException e) {
             e.printStackTrace();
