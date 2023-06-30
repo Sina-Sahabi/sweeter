@@ -28,103 +28,68 @@ public class TweetHandler implements HttpHandler {
         String response = "";
         String[] splittedPath = path.split("/");
         switch (method) {
-            // ip:port/tweets/tweet-type
+            // ip:port/tweets/
             case "POST":
-                String user_id = ExtractUserAuth.extract(exchange);
-                if (user_id == null) {
-                    response = "token not valid!";
-                    break;
+                if (splittedPath.length == 3) {
+                    if (!splittedPath[2].equals(ExtractUserAuth.extract(exchange))) {
+                        response = "permission-denied";
+                        break;
+                    }
+
+                    InputStream requestBody = exchange.getRequestBody();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
+                    StringBuilder body = new StringBuilder();
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        body.append(line);
+                    }
+                    requestBody.close();
+
+                    // Process the user creation based on the request body
+                    String newTweet = body.toString();
+                    JSONObject jsonObject = new JSONObject(newTweet);
+                    String tweet_id = "";
+                    try {
+                        tweet_id = tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+
+                    response = tweet_id;
                 }
-                switch (splittedPath[splittedPath.length - 1]) {
-                    case "tweet": {
-                        InputStream requestBody = exchange.getRequestBody();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-                        StringBuilder body = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            body.append(line);
-                        }
-                        requestBody.close();
-
-                        // Process the user creation based on the request body
-                        String newTweet = body.toString();
-                        JSONObject jsonObject = new JSONObject(newTweet);
-                        try {
-                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), null, toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        response = "Tweet successfully tweeted!";
-                        break;
-                    }
-                    case "retweet": {
-                        InputStream requestBody = exchange.getRequestBody();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-                        StringBuilder body = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            body.append(line);
-                        }
-                        requestBody.close();
-
-                        // Process the user creation based on the request body
-                        String newreTweet = body.toString();
-                        JSONObject jsonObject = new JSONObject(newreTweet);
-                        try {
-                            String reTweetId = jsonObject.getString("quoteTweetId");
-                            if (tweetController.getTweet(reTweetId) == null) {
-                                response = "tweet not found!";
-                                break;
-                            }
-                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), null, jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        response = "Tweet successfully retweeted!";
-                        break;
-                    }
-                    case "quoteTweet": {
-                        InputStream requestBody = exchange.getRequestBody();
-                        BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-                        StringBuilder body = new StringBuilder();
-                        String line;
-                        while ((line = reader.readLine()) != null) {
-                            body.append(line);
-                        }
-                        requestBody.close();
-
-                        // Process the user creation based on the request body
-                        String newreTweet = body.toString();
-                        JSONObject jsonObject = new JSONObject(newreTweet);
-                        try {
-                            String quotedTweetId = jsonObject.getString("quoteTweetId");
-                            if (tweetController.getTweet(quotedTweetId) == null) {
-                                response = "tweet not found!";
-                                break;
-                            }
-                            tweetController.createTweet(jsonObject.getString("writerId"), jsonObject.getString("ownerId"), jsonObject.getString("text"), jsonObject.getString("quoteTweetId"), toStringArray(jsonObject.getJSONArray("mediaPaths")), jsonObject.getInt("likes"), jsonObject.getInt("retweets"), jsonObject.getInt("replies"));
-                        } catch (SQLException e) {
-                            e.printStackTrace();
-                        }
-
-                        response = "Tweet successfully retweeted!";
-                        break;
-                    }
-
-                    default:
-                        response = "unknown-request";
-                        break;
-                }
+                else
+                    response = "unknown request";
                 break;
             case "GET":
-                String tweetId = splittedPath[splittedPath.length - 1];
-                try {
-                    response = tweetController.getTweetById(tweetId);
-                } catch (SQLException e) {
-                    e.printStackTrace();
+                if (splittedPath.length == 2) {
+                    try {
+                        response = tweetController.getAll();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
+                else if (splittedPath.length == 3) {
+                    String tweetId = splittedPath[splittedPath.length - 1];
+                    try {
+                        response = tweetController.getTweetById(tweetId);
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else
+                    response = "alo!";
+                break;
+            case "DELETE":
+                if (splittedPath.length == 2) {
+                    try {
+                        tweetController.deleteAll();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
+                    response = "all tweets deleted";
+                }
+                else
+                    response = "alo!";
                 break;
             default:
                 response = "unknown-request";

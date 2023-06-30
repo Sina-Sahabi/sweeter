@@ -6,9 +6,11 @@ import java.sql.SQLException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinarmin.server.dataAccess.TweetDAO;
+import com.sinarmin.server.models.Follow;
 import com.sinarmin.server.models.Tweet;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TweetController {
     private final TweetDAO tweetDAO;
@@ -17,10 +19,10 @@ public class TweetController {
         tweetDAO = new TweetDAO();
     }
 
-    public void createTweet(String writerId, String ownerId, String text, String quoteTweetId, String[] mediaPaths, int likes, int retweets, int replies) throws SQLException {
+    public String createTweet(String writerId, String ownerId, String text, String quoteTweetId, String[] mediaPaths, int likes, int retweets, int replies) throws SQLException {
         Tweet tweet = new Tweet();
 
-        tweet.setId(String.format("%d", Tweet.getTotalNumOfTweets()));
+        tweet.setId(String.format("%d", tweetDAO.NumberOfTweets()));
         Tweet.IncTotalNumOfTweets();
         tweet.setWriterId(writerId);
         tweet.setOwnerId(ownerId);
@@ -32,6 +34,7 @@ public class TweetController {
         tweet.setReplies(replies);
         tweet.setCreatedAt(Date.valueOf(LocalDate.now()));
         tweetDAO.saveTweet(tweet);
+        return tweet.getId();
     }
 
     public void updateTweet(String writerId, String ownerId, String text, String quoteTweetId, String[] mediaPaths, int likes, int retweets, int replies) throws SQLException {
@@ -70,5 +73,14 @@ public class TweetController {
         ObjectMapper objectMapper = new ObjectMapper();
         String response = objectMapper.writeValueAsString(tweet);
         return response;
+    }
+
+    public String getAll() throws SQLException, JsonProcessingException {
+        List<Tweet> tweets = tweetDAO.getAll();
+        ObjectMapper objectMapper = new ObjectMapper();
+        return objectMapper.writeValueAsString(tweets);
+    }
+    public void deleteAll() throws SQLException {
+        tweetDAO.deleteAll();
     }
 }

@@ -121,8 +121,11 @@ public class    Tweet {
     }
 
     public void setMediaPaths(String[] mediaPaths) {
-        for (String mediaPath : mediaPaths) {
-            this.mediaPaths.add(mediaPath);
+        this.mediaPaths = new ArrayList<>();
+        if (mediaPaths != null) {
+            for (String mediaPath : mediaPaths) {
+                this.mediaPaths.add(mediaPath);
+            }
         }
     }
 
