@@ -8,6 +8,8 @@ import com.sinarmin.server.utils.JwtAuth;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SessionHandler implements HttpHandler {
     @Override
@@ -36,7 +38,7 @@ public class SessionHandler implements HttpHandler {
                     response = "userID or userPassWord is incorrect";
                 } else {
                     Headers headers = exchange.getResponseHeaders();
-                    headers.add(claimedUserId, JwtAuth.jws(claimedUserId));
+                    headers.put("JWT", List.of(new String[]{claimedUserId, JwtAuth.jws(claimedUserId)}));
                     response = "welcome";
                 }
                 break;

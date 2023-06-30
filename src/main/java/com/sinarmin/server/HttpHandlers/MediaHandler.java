@@ -31,7 +31,7 @@ public class MediaHandler implements HttpHandler {
 		} else switch (method) {
 			case "GET":
 				File file;
-				file = new File("src/main/java/org/example/server/assets/" + splittedPath[2] + "/" + splittedPath[3] + "." + splittedPath[4]);
+				file = new File("src/main/java/com/sinarmin/server/assets/" + splittedPath[2] + "/" + splittedPath[3] + "." + splittedPath[4]);
 				if (!file.exists()) {
 					response = "no file";
 					break;
@@ -51,7 +51,7 @@ public class MediaHandler implements HttpHandler {
 					response = "permission-denied";
 					break;
 				}
-				Files.copy(exchange.getRequestBody(), Path.of("src/main/java/org/example/server/assets/" , splittedPath[2], splittedPath[3] + "." + splittedPath[4]), StandardCopyOption.REPLACE_EXISTING);
+				Files.copy(exchange.getRequestBody(), Path.of("src/main/java/com/sinarmin/server/assets/" , splittedPath[2], splittedPath[3] + "." + splittedPath[4]), StandardCopyOption.REPLACE_EXISTING);
 				exchange.getRequestBody().close();
 				response = "done";
 				break;
