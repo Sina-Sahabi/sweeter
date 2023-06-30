@@ -1,5 +1,6 @@
 package com.sinarmin.server.HttpHandlers;
 
+import com.sinarmin.server.controllers.BlockController;
 import com.sinarmin.server.controllers.FollowController;
 import com.sinarmin.server.controllers.UserController;
 import com.sinarmin.server.utils.ExtractUserAuth;
@@ -22,6 +23,13 @@ public class FollowHandler implements HttpHandler {
         UserController userController = null;
         try {
             userController = new UserController();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+        BlockController blockController = null;
+        try {
+            blockController = new BlockController();
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException(e);
@@ -67,14 +75,16 @@ public class FollowHandler implements HttpHandler {
                 } else if (!splittedPath[2].equals(ExtractUserAuth.extract(exchange))) {
                     response = "permission-denied";
                 } else {
-                    //todo block
+                    response = "Done!";
                     try {
-                        followController.saveFollow(splittedPath[2], splittedPath[3]);
+                        if (!blockController.isBlocking(splittedPath[2], splittedPath[3]) && !blockController.isBlocking(splittedPath[3], splittedPath[2]))
+                            followController.saveFollow(splittedPath[2], splittedPath[3]);
+                        else
+                            response = "Blocked";
                     } catch (SQLException e) {
                         e.printStackTrace();
                         throw new RuntimeException(e);
                     }
-                    response = "Done!";
                 }
                 break;
             case "DELETE":
