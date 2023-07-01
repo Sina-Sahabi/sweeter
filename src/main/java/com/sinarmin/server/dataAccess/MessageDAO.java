@@ -14,7 +14,7 @@ public class MessageDAO {
 	}
 
 	public void createMessageTable() throws SQLException {
-		PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS messages (id VARCHAR(60) PRIMARY KEY, sender VARCHAR(36), receiver VARCHAR(36), text VARCHAR(300), createdat DATE)");
+		PreparedStatement preparedStatement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS messages (id VARCHAR(60) PRIMARY KEY, sender VARCHAR(36), receiver VARCHAR(36), text VARCHAR(300), createdat bigint)");
 		preparedStatement.executeUpdate();
 	}
 
@@ -24,7 +24,7 @@ public class MessageDAO {
 		preparedStatement.setString(2, message.getSender());
 		preparedStatement.setString(3, message.getReceiver());
 		preparedStatement.setString(4, message.getText());
-		preparedStatement.setDate(5, message.getCreatedAt());
+		preparedStatement.setLong(5, message.getCreatedAt());
 		preparedStatement.executeUpdate();
 	}
 
@@ -32,7 +32,7 @@ public class MessageDAO {
 		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM messages WHERE id = ?");
 		preparedStatement.setString(1, message.getId());
 		preparedStatement.executeUpdate();
-	}//todo
+	}
 
 	public void deleteAll() throws SQLException {
 		PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM messages");

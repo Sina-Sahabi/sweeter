@@ -1,14 +1,11 @@
 package com.sinarmin.server.dataAccess;
 
-import com.sinarmin.server.models.Follow;
 import com.sinarmin.server.models.Tweet;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TweetDAO {
-
     private final Connection connection;
     public TweetDAO() throws SQLException {
         connection = DatabaseConnectionManager.getConnection();

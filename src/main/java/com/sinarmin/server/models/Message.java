@@ -17,13 +17,13 @@ public class Message {
 	private String text;
 
 	@JsonProperty("createdAt")
-	private Date createdAt;
+	private long createdAt;
 
 	public Message () {
 
 	}
 
-	public Message(String id, String sender, String receiver, String text, Date createdAt) {
+	public Message(String id, String sender, String receiver, String text, long createdAt) {
 		this.id = id;
 		this.sender = sender;
 		this.receiver = receiver;
@@ -36,7 +36,7 @@ public class Message {
 		this.sender = sender;
 		this.receiver = receiver;
 		this.text = text;
-		this.createdAt = new Date(System.currentTimeMillis());
+		this.createdAt = System.currentTimeMillis();
 	}
 
 	public Message(String sender, String receiver, String text) {
@@ -44,7 +44,7 @@ public class Message {
 		this.sender = sender;
 		this.receiver = receiver;
 		this.text = text;
-		this.createdAt = new Date(System.currentTimeMillis());
+		this.createdAt = System.currentTimeMillis();
 	}
 
 	public String getId() {
@@ -79,11 +79,11 @@ public class Message {
 		this.text = text;
 	}
 
-	public Date getCreatedAt() {
+	public long getCreatedAt() {
 		return createdAt;
 	}
 
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(long createdAt) {
 		this.createdAt = createdAt;
 	}
 
