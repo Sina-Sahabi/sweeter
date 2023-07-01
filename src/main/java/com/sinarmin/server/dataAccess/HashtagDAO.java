@@ -9,8 +9,12 @@ public class HashtagDAO {
         connection = DatabaseConnectionManager.getConnection();
         createHashtagTable();
     }
+    public void Drop() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("DROP TABLE tags");
+        statement.executeUpdate();
+    }
     public void createHashtagTable() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tags (id VARCHAR(280) PRIMARY KEY, tweet VARCHAR(36), PRIMARY KEY (id, tweet))");
+        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tags (id VARCHAR(280) , tweet VARCHAR(36), PRIMARY KEY (id, tweet))");
         statement.executeUpdate();
     }
 
