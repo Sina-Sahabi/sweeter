@@ -50,6 +50,6 @@ public class BlockController {
 	}
 
 	public boolean isBlocking(String blockerId, String blockedId) throws SQLException {
-		return blockDAO.isBlocking(blockerId, blockerId);
+		return blockDAO.isBlocking(blockerId, blockedId);
 	}
 }

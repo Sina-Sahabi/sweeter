@@ -87,6 +87,7 @@ public class UserController {
     }
 
     public boolean isUserExists (String ID) {
+        if (ID == null) return false;
         try {
             return (userDAO.getUser(ID) != null);
         } catch (SQLException e) {

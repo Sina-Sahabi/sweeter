@@ -1,47 +1,31 @@
 package com.sinarmin.server.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sinarmin.server.dataAccess.HashtagDAO;
-import com.sinarmin.server.models.Hashtag;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class HashtagController {
     private final HashtagDAO hashtagDAO;
+
     public HashtagController() throws SQLException {
         hashtagDAO = new HashtagDAO();
     }
-    public void createHashtag(String id) throws SQLException {
-        Hashtag hashtag = new Hashtag();
-        hashtag.setHashtagId(id);
-        hashtag.setHashtagTweetsId(new ArrayList<>());
-        hashtagDAO.saveHashtag(hashtag);
-    }
-    public void updateHashtag(String id, String[] tweets_id) throws SQLException {
-        Hashtag hashtag = new Hashtag();
-        hashtag.setHashtagId(id);
-        hashtag.setHashtagTweetsId(tweets_id);
-        hashtagDAO.updateHashtag(hashtag);
-    }
-    public void updateHashtag(Hashtag hashtag) throws SQLException {
-        hashtagDAO.updateHashtag(hashtag);
-    }
-    public void deleteHashtag(String id) throws SQLException {
-        hashtagDAO.deleteHashtag(id);
+
+    public void addHashtag(String id, String tweet) throws SQLException {
+        hashtagDAO.saveHashtag(id, tweet);
     }
 
-    public Hashtag getHashtag(String id) throws SQLException {
-        return hashtagDAO.getHashtag(id);
+    public void deleteAll() throws SQLException {
+        hashtagDAO.deleteAll();
     }
-    public String JsonGetHashtag(String id) throws SQLException, JsonProcessingException {
-        Hashtag hashtag = hashtagDAO.getHashtag(id);
 
-        if (hashtag == null)
-            return null;
-        ObjectMapper objectMapper = new ObjectMapper();
-        String response = objectMapper.writeValueAsString(hashtag);
-        return response;
+    public String GetHashtag(String id) throws SQLException {
+        ArrayList<String> tweets = hashtagDAO.getHashtag(id);
+        StringBuilder response = new StringBuilder();
+        for (int i = 0; i < tweets.size(); i++) {
+            if (i > 0) response.append(',');
+            response.append(tweets.get(i));
+        }
+        return response.toString();
     }
 }

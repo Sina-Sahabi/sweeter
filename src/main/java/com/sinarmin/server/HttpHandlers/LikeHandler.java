@@ -111,7 +111,7 @@ public class LikeHandler implements HttpHandler {
 							response = "Done!";
 						}
 					} catch (SQLException e) {
-						throw new RuntimeException(e);
+						e.printStackTrace();
 					}
 				}
 				break;
