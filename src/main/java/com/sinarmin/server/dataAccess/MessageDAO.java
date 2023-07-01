@@ -43,7 +43,7 @@ public class MessageDAO {
 
 	public ArrayList<Message> getMessages(String u1, String u2) throws SQLException {
 		ArrayList<Message> messages = new ArrayList<>();
-		PreparedStatement statement = connection.prepareStatement("SELECT * FROM users WHERE (sender = ? AND receiver = ?) or (sender = ? AND receiver = ?)");
+		PreparedStatement statement = connection.prepareStatement("SELECT * FROM messages WHERE (sender = ? AND receiver = ?) or (sender = ? AND receiver = ?)");
 		statement.setString(1, u1); statement.setString(2, u2);
 		statement.setString(3, u2); statement.setString(4, u1);
 		ResultSet resultSet = statement.executeQuery();
