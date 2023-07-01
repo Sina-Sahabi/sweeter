@@ -1,6 +1,7 @@
 package com.sinarmin.server.HttpHandlers;
 
 import com.sinarmin.server.controllers.LikeController;
+import com.sinarmin.server.controllers.TweetController;
 import com.sinarmin.server.controllers.UserController;
 import com.sinarmin.server.utils.ExtractUserAuth;
 import com.sun.net.httpserver.HttpExchange;
@@ -22,6 +23,13 @@ public class LikeHandler implements HttpHandler {
 		UserController userController = null;
 		try {
 			userController = new UserController();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		TweetController tweetController = null;
+		try {
+			tweetController = new TweetController();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
@@ -87,18 +95,24 @@ public class LikeHandler implements HttpHandler {
 						}
 						response = "Done!";
 					} else response = "wtf";
-				} else if (!userController.isUserExists(splittedPath[2]) || !userController.isUserExists(splittedPath[3])) {
-					response = "user-not-found";
-				} else if (!splittedPath[2].equals(ExtractUserAuth.extract(exchange))) {
-					response = "permission-denied";
 				} else {
 					try {
-						likeController.deleteLike(splittedPath[2], splittedPath[3]);
+						if (!userController.isUserExists(splittedPath[2]) || tweetController.getTweetById(splittedPath[3]) == null) {
+							response = "user-not-found";
+						} else if (!splittedPath[2].equals(ExtractUserAuth.extract(exchange))) {
+							response = "permission-denied";
+						} else {
+							try {
+								likeController.deleteLike(splittedPath[2], splittedPath[3]);
+							} catch (SQLException e) {
+								e.printStackTrace();
+								throw new RuntimeException(e);
+							}
+							response = "Done!";
+						}
 					} catch (SQLException e) {
-						e.printStackTrace();
 						throw new RuntimeException(e);
 					}
-					response = "Done!";
 				}
 				break;
 		}
