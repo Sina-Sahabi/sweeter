@@ -38,7 +38,7 @@ public class SessionHandler implements HttpHandler {
                     response = "userID or userPassWord is incorrect";
                 } else {
                     Headers headers = exchange.getResponseHeaders();
-                    headers.put("JWT", List.of(new String[]{claimedUserId, JwtAuth.jws(claimedUserId)}));
+                    headers.add("JWT", claimedUserId + "!" + JwtAuth.jws(claimedUserId));
                     response = "welcome";
                 }
                 break;

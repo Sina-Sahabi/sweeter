@@ -6,10 +6,9 @@ import com.sinarmin.server.dataAccess.BioDAO;
 import com.sinarmin.server.dataAccess.UserDAO;
 import com.sinarmin.server.models.Bio;
 import com.sinarmin.server.models.User;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 
 public class UserController {
     private final UserDAO userDAO;

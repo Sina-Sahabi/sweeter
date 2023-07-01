@@ -6,7 +6,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 import com.sinarmin.server.controllers.UserController;
 import org.json.JSONObject;
 

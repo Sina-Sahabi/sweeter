@@ -12,7 +12,7 @@ import org.json.*;
 
 import java.io.*;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 
 public class TweetHandler implements HttpHandler {
     @Override

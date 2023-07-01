@@ -1,11 +1,10 @@
 package com.sinarmin.server.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
-import java.util.Date;
+import java.sql.Date;
 import java.util.ArrayList;
 
-public class    Tweet {
+public class Tweet {
     private static int TotalNumOfTweets;
 
     static {
@@ -61,6 +60,19 @@ public class    Tweet {
         this.text = text;
         this.quoteTweetId = quoteTweetId;
         this.createdAt = createdAt;
+        likes = 0;
+        retweets = 0;
+        replies = 0;
+        mediaPaths = new ArrayList<String>();
+    }
+
+    public Tweet(String id, String writerId, String ownerId, String text, String quoteTweetId) {
+        this.id = id;
+        this.writerId = writerId;
+        this.ownerId = ownerId;
+        this.text = text;
+        this.quoteTweetId = quoteTweetId;
+        this.createdAt = new Date(System.currentTimeMillis());
         likes = 0;
         retweets = 0;
         replies = 0;

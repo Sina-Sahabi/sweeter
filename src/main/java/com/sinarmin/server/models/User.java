@@ -1,8 +1,6 @@
 package com.sinarmin.server.models;
 
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
-import java.util.Date;
+import java.sql.Date;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
@@ -54,7 +52,7 @@ public class User {
         this.password = password;
         this.country = country;
         this.birthday = birthday;
-        this.createdAt = new Date(LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
+        this.createdAt = new Date(System.currentTimeMillis());
     }
 
     public User() {
