@@ -89,7 +89,6 @@ public class UserHandler implements HttpHandler {
             default:
                 break;
         }
-
         exchange.sendResponseHeaders(200, response.getBytes().length);
         OutputStream os = exchange.getResponseBody();
         os.write(response.getBytes());
