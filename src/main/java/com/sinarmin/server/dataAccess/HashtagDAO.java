@@ -27,7 +27,7 @@ public class HashtagDAO {
     }
 
     public ArrayList<String> getHashtag(String id) throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("SELECT * FROM hashtags WHERE id = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM tags WHERE id = ?");
         statement.setString(1, id);
         ResultSet resultSet = statement.executeQuery();
         ArrayList<String> tweets = new ArrayList<>();
