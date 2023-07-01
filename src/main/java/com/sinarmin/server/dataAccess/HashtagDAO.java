@@ -10,7 +10,7 @@ public class HashtagDAO {
         createHashtagTable();
     }
     public void createHashtagTable() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tags (id VARCHAR(280) PRIMARY KEY, tweet VARCHAR(36))");
+        PreparedStatement statement = connection.prepareStatement("CREATE TABLE IF NOT EXISTS tags (id VARCHAR(280) PRIMARY KEY, tweet VARCHAR(36), PRIMARY KEY (id, tweet))");
         statement.executeUpdate();
     }
 
