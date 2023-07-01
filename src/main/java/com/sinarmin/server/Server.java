@@ -21,6 +21,7 @@ public class Server {
             server.createContext("/hashtag", new HashtagHandler());
             server.createContext("/like", new LikeHandler());
             server.createContext("/direct", new MessageHandler());
+            server.createContext("/blocks", new BlockHandler());
             server.start();
         } catch (IOException e) {
             e.printStackTrace();
