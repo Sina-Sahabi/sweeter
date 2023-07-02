@@ -3,7 +3,7 @@ package com.sinarmin.server.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.sql.Date;
 
-public class Message {
+public class Message implements Comparable {
 	@JsonProperty("id")
 	private String id;
 
@@ -96,5 +96,34 @@ public class Message {
 				", text='" + text + '\'' +
 				", createdAt=" + createdAt +
 				'}';
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Message message = (Message) o;
+
+		if (createdAt != message.createdAt) return false;
+		if (!id.equals(message.id)) return false;
+		if (!sender.equals(message.sender)) return false;
+		if (!receiver.equals(message.receiver)) return false;
+		return text.equals(message.text);
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id.hashCode();
+		result = 31 * result + sender.hashCode();
+		result = 31 * result + receiver.hashCode();
+		result = 31 * result + text.hashCode();
+		result = 31 * result + (int) (createdAt ^ (createdAt >>> 32));
+		return result;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		return (int)(((Message)o).createdAt - createdAt);
 	}
 }

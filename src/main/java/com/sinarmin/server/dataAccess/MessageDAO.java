@@ -58,4 +58,21 @@ public class MessageDAO {
 		}
 		return messages;
 	}
+
+	public ArrayList<Message> getNotify(String receiver) throws SQLException {
+		ArrayList<Message> messages = new ArrayList<>();
+		PreparedStatement statement = connection.prepareStatement("SELECT * FROM messages WHERE receiver = ?");
+		statement.setString(1, receiver);
+		ResultSet resultSet = statement.executeQuery();
+		while (resultSet.next()) {
+			Message message = new Message();
+			message.setId(resultSet.getString("id"));
+			message.setSender(resultSet.getString("sender"));
+			message.setReceiver(resultSet.getString("receiver"));
+			message.setText(resultSet.getString("text"));
+			message.setCreatedAt(resultSet.getLong("createdat"));
+			messages.add(message);
+		}
+		return messages;
+	}
 }

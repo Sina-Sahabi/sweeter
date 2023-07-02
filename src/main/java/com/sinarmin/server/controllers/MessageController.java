@@ -6,6 +6,7 @@ import com.sinarmin.server.dataAccess.MessageDAO;
 import com.sinarmin.server.models.Message;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MessageController {
 	private final MessageDAO messageDAO;
@@ -31,5 +32,14 @@ public class MessageController {
 
 	public void deleteAll() throws SQLException {
 		messageDAO.deleteAll();
+	}
+
+	public String getNotify(String receiver, int cnt) throws SQLException, JsonProcessingException {
+		ArrayList<Message> messages = messageDAO.getNotify(receiver);
+//		Collections.sort(messages);
+		cnt = Integer.min(cnt, messages.size());
+		ObjectMapper objectMapper = new ObjectMapper();
+		String response = objectMapper.writeValueAsString(messages.subList(messages.size() - cnt, messages.size()));
+		return response;
 	}
 }

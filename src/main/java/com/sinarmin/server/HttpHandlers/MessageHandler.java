@@ -27,6 +27,14 @@ public class MessageHandler implements HttpHandler {
 					response = "permission-denied";
 					break;
 				}
+				if (splittedPath.length == 3) { //port:id/direct/person
+					try {
+						response = messageController.getNotify(splittedPath[2], 20);
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+					break;
+				}
 				try {
 					response = messageController.getMessages(splittedPath[2], splittedPath[3]);
 				} catch (SQLException e) {
