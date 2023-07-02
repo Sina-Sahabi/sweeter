@@ -13,7 +13,7 @@ public class TweetDAO {
     }
 
     public void deletDB() throws SQLException {
-        PreparedStatement statement = connection.prepareStatement("DROP TABLE IF EXISTS E tweets");
+        PreparedStatement statement = connection.prepareStatement("DROP TABLE IF EXISTS tweets");
         statement.executeUpdate();
     }
 
@@ -216,5 +216,16 @@ public class TweetDAO {
     public void deleteAll() throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM tweets");
         preparedStatement.executeUpdate();
+    }
+
+    public ArrayList<String> getTweetsByDate(Date date) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT id FROM tweets WHERE create_at = ?");
+        statement.setDate(1, date);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<String> tweets = new ArrayList<>();
+        while (resultSet.next()) {
+            tweets.add(resultSet.getString("id"));
+        }
+        return tweets;
     }
 }

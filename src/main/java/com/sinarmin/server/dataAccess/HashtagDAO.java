@@ -2,6 +2,7 @@ package com.sinarmin.server.dataAccess;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class HashtagDAO {
     private final Connection connection;
@@ -39,5 +40,16 @@ public class HashtagDAO {
             tweets.add(resultSet.getString("tweet"));
         }
         return tweets;
+    }
+
+    public ArrayList<String> getTags(String id) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("SELECT id FROM tags WHERE tweet = ?");
+        statement.setString(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        ArrayList<String> tags = new ArrayList<>();
+        while (resultSet.next()) {
+            tags.add(resultSet.getString("id"));
+        }
+        return tags;
     }
 }

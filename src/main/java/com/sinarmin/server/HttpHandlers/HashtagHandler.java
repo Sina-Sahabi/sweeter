@@ -41,8 +41,8 @@ public class HashtagHandler implements HttpHandler {
         String[] splittedPath = path.split("/");
 
         switch (method) {
-            case "GET": // ip:port/hashtag/tagName
-                if (splittedPath.length != 3) {
+            case "GET":
+                if (splittedPath.length != 3) { // ip:port/hashtag/tagName
                     response = "wtf";
                     break;
                 }
