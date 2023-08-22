@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="939.0" prefWidth="600.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" fx:controller="com.example.sweeter_client.edit_profile_controller">
+    <center>
+        <AnchorPane prefHeight="743.0" prefWidth="600.0" style="-fx-background-color: #192841;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="47.0" layoutY="56.0" text="Bio" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="bio_tf" layoutX="136.0" layoutY="56.0" prefHeight="202.0" prefWidth="423.0" promptText="Bio" />
+            <Label layoutX="17.0" layoutY="306.0" text="Website" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="website_tf" layoutX="136.0" layoutY="303.0" prefHeight="36.0" prefWidth="423.0" promptText="Website" />
+            <Label layoutX="15.0" layoutY="378.0" text="Location" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <TextField fx:id="locaton_tf" layoutX="136.0" layoutY="375.0" prefHeight="36.0" prefWidth="423.0" promptText="Location" />
+            <Label layoutX="17.0" layoutY="460.0" text="Select Avatar Picture" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="17.0" layoutY="540.0" text="Select Header Picture" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="Avatar_button" layoutX="327.0" layoutY="461.0" mnemonicParsing="false" onAction="#AvatarFileChooser" prefHeight="29.0" prefWidth="159.0" text="File Chooser" />
+            <Button fx:id="header_button" layoutX="327.0" layoutY="540.0" mnemonicParsing="false" onAction="#HeaderFileChooser" prefHeight="29.0" prefWidth="159.0" text="File Chooser" />
+            <Button fx:id="save_button" layoutX="217.0" layoutY="637.0" mnemonicParsing="false" onAction="#SaveChangePressed" prefHeight="47.0" prefWidth="167.0" text="Save Changes">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Label fx:id="Avatar_label" layoutX="16.0" layoutY="499.0" textFill="WHITE" />
+            <Label fx:id="header_label" layoutX="16.0" layoutY="581.0" textFill="WHITE" />
+         </children></AnchorPane>
+    </center>
+    <bottom>
+        <AnchorPane prefHeight="144.0" prefWidth="612.0" style="-fx-background-color: #192841;" BorderPane.alignment="CENTER" />
+    </bottom>
+    <top>
+        <AnchorPane prefHeight="39.0" prefWidth="600.0" style="-fx-background-color: #192841;" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="back_button" layoutY="2.0" mnemonicParsing="false" onAction="#goBack" onMouseEntered="#Back_button_Entered" onMouseExited="#Back_button_exit" prefHeight="36.0" prefWidth="91.0" style="-fx-background-color: #192841;" text="&lt; back" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            <Button fx:id="refresh_button" layoutX="509.0" layoutY="7.0" mnemonicParsing="false" onAction="#refreshing" onMouseEntered="#refresh_button_Entered" onMouseExited="#refresh_button_exit" prefHeight="36.0" prefWidth="91.0" style="-fx-background-color: #192841;" text="refresh" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            </children>
+        </AnchorPane>
+    </top>
+</BorderPane>

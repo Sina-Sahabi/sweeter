@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="939.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sweeter_client.Trend_controller">
+    <center>
+        <AnchorPane prefHeight="743.0" prefWidth="600.0" style="-fx-background-color: #192841;" BorderPane.alignment="CENTER">
+            <children>
+                <Label fx:id="Avatar_label" layoutX="16.0" layoutY="499.0" textFill="WHITE" />
+                <Label fx:id="header_label" layoutX="16.0" layoutY="581.0" textFill="WHITE" />
+            <Label layoutX="41.0" layoutY="44.0" prefHeight="55.0" prefWidth="298.0" text="Enter hashtags.." textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hashtag1TextField" layoutX="197.0" layoutY="166.0" prefHeight="24.0" prefWidth="362.0" />
+            <Label layoutX="44.0" layoutY="167.0" text="first hashtag" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="30.0" layoutY="253.0" text="second hashtag" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="41.0" layoutY="333.0" text="third hashtag" textFill="WHITE">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="hashtag2TextField" layoutX="197.0" layoutY="252.0" prefHeight="24.0" prefWidth="362.0" />
+            <TextField fx:id="hashtag3TextField" layoutX="197.0" layoutY="332.0" prefHeight="24.0" prefWidth="362.0" />
+            <Button layoutX="234.0" layoutY="435.0" mnemonicParsing="false" onAction="#generate_graph" prefHeight="37.0" prefWidth="132.0" text="generate graph" />
+            </children></AnchorPane>
+    </center>
+    <bottom>
+        <AnchorPane prefHeight="144.0" prefWidth="612.0" style="-fx-background-color: #192841;" BorderPane.alignment="CENTER" />
+    </bottom>
+    <top>
+        <AnchorPane prefHeight="39.0" prefWidth="600.0" style="-fx-background-color: #192841;" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="back_button" layoutY="2.0" mnemonicParsing="false" onAction="#goBack" onMouseEntered="#Back_button_Entered" onMouseExited="#Back_button_exit" prefHeight="36.0" prefWidth="91.0" style="-fx-background-color: #192841;" text="&lt; back" textFill="WHITE">
+                    <font>
+                        <Font size="18.0" />
+                    </font>
+                </Button>
+            </children>
+        </AnchorPane>
+    </top>
+</BorderPane>
